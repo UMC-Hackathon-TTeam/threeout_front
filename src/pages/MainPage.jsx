@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { Button } from "../styles/Common";
 
 export default function MainPage() {
@@ -12,7 +11,8 @@ export default function MainPage() {
 
   return (
     <Button
-      color='#71CACC'
+      color='white'
+      backgroun
       onClick={goToLogin}
     >
       시작하기

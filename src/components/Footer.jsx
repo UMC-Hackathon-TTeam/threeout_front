@@ -51,11 +51,12 @@ export default Footer;
 
 const NavWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   position: absolute;
   bottom: 0;
-  left: 0px;
-  right: 0px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   max-width: 530px;
   background: #fff;
   border-top: 0.4px solid #545f71;
@@ -65,9 +66,7 @@ const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px;
-  size: 50px;
-  /* margin: 20px 30px 20px 30px; */
-  width: 80px;
-  height: 80px;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
 `;

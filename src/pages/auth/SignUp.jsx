@@ -64,38 +64,50 @@ export default function SignUp() {
   };
 
   return (
-    <Wrapper onSubmit={handleSubmit(onSubmit)}>
-      <Label first>아이디</Label>
-      <InputBox
-        name="email"
-        placeholder="이메일을 입력해주세요"
-        {...register("email")}
-      />
-      {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+    <Wrapper>
+      <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+        <Label first>아이디</Label>
+        <InputBox
+          name='email'
+          placeholder='이메일을 입력해주세요'
+          {...register("email")}
+        />
+        {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
 
-      <Label>비밀번호</Label>
-      <InputBox
-        name="password"
-        placeholder="비밀번호를 입력해주세요"
-        type="password"
-        {...register("password")}
-      />
-      {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
+        <Label>비밀번호</Label>
+        <InputBox
+          name='password'
+          placeholder='비밀번호를 입력해주세요'
+          type='password'
+          {...register("password")}
+        />
+        {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
 
-      <Label>비밀번호 재확인</Label>
-      <InputBox
-        name="passwordConfirm"
-        placeholder="확인을 위해 비밀번호를 입력해주세요"
-        type="password"
-        {...register("passwordConfirm")}
-      />
-      {errors.passwordConfirm && (
-        <ErrorText>{errors.passwordConfirm.message}</ErrorText>
-      )}
+        <Label>비밀번호 재확인</Label>
+        <InputBox
+          name='passwordConfirm'
+          placeholder='확인을 위해 비밀번호를 입력해주세요'
+          type='password'
+          {...register("passwordConfirm")}
+        />
+        {errors.passwordConfirm && (
+          <ErrorText>{errors.passwordConfirm.message}</ErrorText>
+        )}
 
-      <Button color="#848484" marginTop="100px" type="submit">
-        다음 단계로 이동
-      </Button>
+        <Button
+          color='#848484'
+          marginTop='100px'
+          type='submit'
+        >
+          다음 단계로 이동
+        </Button>
+      </FormWrapper>
     </Wrapper>
   );
 }
+
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;

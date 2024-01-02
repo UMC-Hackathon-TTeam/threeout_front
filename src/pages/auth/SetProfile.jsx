@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { emailState, passwordState } from "../../recoil/atom";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import {
   Button,
@@ -10,9 +12,13 @@ import {
   ErrorText,
 } from "../../styles/Common";
 import ImageUpload from "../../components/ImageUpload";
+import axios from "axios";
 
 export default function SetProfile() {
   const [state, setState] = useState({});
+  const [email] = useRecoilState(emailState);
+  const [password] = useRecoilState(passwordState);
+
   const navigate = useNavigate();
   const {
     register,
@@ -42,7 +48,20 @@ export default function SetProfile() {
   const onSubmit = (data) => {
     setState(data);
     console.log(data); // 수정된 부분: 직접 받아온 데이터 출력
-    navigate("/");
+    axios
+      .post("http://localhost:8080/3out/signup", {
+        email: email,
+        password: password,
+        nickname: data.nickname,
+        promise: data.promise,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    navigate("/main");
   };
 
   return (
@@ -64,7 +83,7 @@ export default function SetProfile() {
       />
       {errors.promise && <ErrorText>{errors.promise.message}</ErrorText>}
 
-      <Button color="#71CACC" type="submit">
+      <Button color="#71CACC" margintop="50px" type="submit">
         확인
       </Button>
     </Wrapper>

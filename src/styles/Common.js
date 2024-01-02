@@ -9,8 +9,8 @@ export const Button = styled.button`
   color: #fff;
   text-align: center;
   font-size: 20px;
-  margin-top: 32px;
   font-weight: 400;
+  margin-top: ${(props) => props.margintop || "22px"};
 `;
 
 export const Wrapper = styled.form`
@@ -31,14 +31,8 @@ export const InputBox = styled.input`
   border: 1px solid #000;
   font-size: 15px;
   font-weight: 400;
-  margin-bottom: 8px;
   padding: 12px;
-
-  ${(props) =>
-    props.addMargin &&
-    css`
-      margin-bottom: 18px; /* 여기에 원하는 크기를 넣어주세요 */
-    `}
+  margin-top: ${(props) => props.margintop || "8px"};
 `;
 export const ErrorText = styled.div`
   font-size: 12px;

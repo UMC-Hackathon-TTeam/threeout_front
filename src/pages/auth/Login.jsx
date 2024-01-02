@@ -20,7 +20,7 @@ export default function Login() {
   };
 
   const goToSign = () => {
-    navigate("/auth/signIn");
+    navigate("/auth/signUp");
   };
 
   return (
@@ -35,7 +35,7 @@ export default function Login() {
           name="email"
           placeholder="이메일을 입력해주세요"
           {...register("email")}
-          addMargin
+          margintop="32px"
         />
         <InputBox
           name="password"
@@ -44,7 +44,7 @@ export default function Login() {
           {...register("password")}
         />
 
-        <Button type="submit" color="#000">
+        <Button type="submit" color="#71CACC">
           로그인
         </Button>
         <Button onClick={goToSign} color="#848484">

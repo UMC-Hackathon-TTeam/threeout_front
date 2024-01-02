@@ -1,18 +1,22 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import Ranking from "../assets/ranking.png";
-import Main from "../assets/peoples.png";
-import danger from "../assets/Error.png";
+import Ranking from "../assets/image/ranking.png";
+import Main from "../assets/image/peoples.png";
+import danger from "../assets/image/Error.png";
 
 const Footer = () => {
   const location = useLocation();
+
+  const isMainPath = /^\/main\b/.test(location.pathname);
+  const isDangerPath = /^\/Danger\b/.test(location.pathname);
+  const isRankingPath = /^\/ranking\b/.test(location.pathname);
 
   return (
     <Navwrapper>
       <NavLink
         to='/main'
-        className={location.pathname.startsWith("/main") ? "active" : ""}
+        style={isMainPath ? { color: "#8BDFDC" } : { color: "#666" }}
       >
         <IconWrapper
           src={Main}
@@ -21,7 +25,7 @@ const Footer = () => {
       </NavLink>
       <NavLink
         to='/Danger'
-        className={location.pathname.startsWith("/Danger") ? "active" : ""}
+        style={isDangerPath ? { color: "#8BDFDC" } : { color: "#666" }}
       >
         <IconWrapper
           src={danger}
@@ -29,8 +33,8 @@ const Footer = () => {
         />
       </NavLink>
       <NavLink
-        to='/Ranking'
-        className={location.pathname.startsWith("/Ranking") ? "active" : ""}
+        to='/ranking'
+        style={isRankingPath ? { color: "#8BDFDC" } : { color: "#666" }}
       >
         <IconWrapper
           src={Ranking}
@@ -46,8 +50,8 @@ export default Footer;
 const Navwrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  position: fixed;
-  bottom: 30px;
+  position: absolute;
+  bottom: 0;
   left: 0px;
   right: 0px;
   max-width: 530px;
@@ -57,16 +61,8 @@ const Navwrapper = styled.div`
 
 const IconWrapper = styled.img`
   display: flex;
-  margin: 20px 60px 0px 30px;
+  margin: 20px 30px 20px 30px;
   text-decoration: none;
-  filter: invert(43%) sepia(1%) saturate(0%) hue-rotate(137deg) brightness(91%)
-    contrast(90%);
-
-  &.active {
-    filter: invert(84%) sepia(46%) saturate(291%) hue-rotate(121deg)
-      brightness(91%) contrast(94%);
-  }
-
   width: 50px;
   height: 50px;
 `;

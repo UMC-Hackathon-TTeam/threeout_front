@@ -9,6 +9,7 @@ import happy from "../../assets/image/happy.png";
 import sad from "../../assets/image/sad.png";
 import warning from "../../assets/image/warning.png";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 export default function RecordText() {
   const navigate = useNavigate();
@@ -77,6 +78,7 @@ export default function RecordText() {
       <Button color="#71CACC" onClick={onClickSubmit}>
         완료
       </Button>
+      <Footer />
     </Wrapper>
   );
 }

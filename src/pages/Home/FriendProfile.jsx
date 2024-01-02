@@ -9,6 +9,7 @@ import sad from "../../assets/image/sad.png";
 import warning from "../../assets/image/warning.png";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 export default function FriendProfile() {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ export default function FriendProfile() {
           기록추가하기
         </Button>
       </Container>
+      <Footer />
     </Wrapper>
   );
 }

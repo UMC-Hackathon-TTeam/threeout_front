@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
 
+export const Margin = styled.div`
+  margin-bottom: ${(props) => props.height}px;
+`;
+
 export const Button = styled.button`
   width: 308px;
   height: 54px;

@@ -4,6 +4,7 @@ import RankCard from "../components/Ranking/RankCard";
 import Banner from "../components/Ranking/Banner";
 import axios from "axios";
 import styled from "styled-components";
+import Footer from "../components/Footer";
 
 const Ranking = () => {
   const [rankingList, setRankingList] = useState([]);
@@ -30,7 +31,7 @@ const Ranking = () => {
   }, [token]);
 
   return (
-    <div className="flex items-center flex-col">
+    <div className='flex items-center flex-col'>
       {loading ? (
         <p>Loading...</p>
       ) : !Array.isArray(rankingList) || rankingList.length === 0 ? (
@@ -41,18 +42,19 @@ const Ranking = () => {
       ) : (
         rankingList.map((friend, index) => (
           <div key={index}>
-            <Banner emotion="신남" />
+            <Banner emotion='신남' />
             <RankGraph />
-            <div className="mb-5" />
+            <div className='mb-5' />
             <RankCard
               img={friend.profile_img}
               nickname={friend.nickname}
               relation={friend.relation}
             />
-            <div className="mb-5" />
+            <div className='mb-5' />
           </div>
         ))
       )}
+      <Footer />
     </div>
   );
 };

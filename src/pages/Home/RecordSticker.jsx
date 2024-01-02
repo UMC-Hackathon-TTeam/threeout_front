@@ -8,6 +8,7 @@ import impressed from "../../assets/image/impressed.png";
 import happy from "../../assets/image/happy.png";
 import sad from "../../assets/image/sad.png";
 import warning from "../../assets/image/warning.png";
+import Footer from "../../components/Footer";
 
 export default function RecordSticker() {
   const navigate = useNavigate();
@@ -60,9 +61,13 @@ export default function RecordSticker() {
           <EmotionTxt>서운함</EmotionTxt>
         </ButtonWrapper>
       </Container>
-      <Button color="#71CACC" onClick={moveToText}>
+      <Button
+        color='#71CACC'
+        onClick={moveToText}
+      >
         다음
       </Button>
+      <Footer />
     </Wrapper>
   );
 }

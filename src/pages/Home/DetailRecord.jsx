@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { Wrapper } from "./../../styles/Common";
-import { emotionState } from "../../recoil/atom";
+import { emotionState, nameState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
 import impressed from "../../assets/image/impressed.png";
 import happy from "../../assets/image/happy.png";
@@ -10,9 +10,11 @@ import sad from "../../assets/image/sad.png";
 import warning from "../../assets/image/warning.png";
 import { AiOutlineLeft } from "react-icons/ai";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 export default function DetailRecord() {
   const [emotion] = useRecoilState(emotionState);
+  const [name] = useRecoilState(nameState);
   const navigate = useNavigate();
   const { friendId } = useParams();
   const parsedFriendId = Number(friendId);
@@ -76,7 +78,7 @@ export default function DetailRecord() {
           <EmotionImg image={warning} />
         ) : null}
         <Text>
-          박승태님은 조디_ISFJ님에게 <br />"
+          {name}님은 조디_ISFJ님에게 <br />"
           {emotion === "impressed"
             ? "감동"
             : emotion === "happy"
@@ -88,11 +90,13 @@ export default function DetailRecord() {
             : null}
           " 을 전달했어요
         </Text>
-        <Date>2024.01.02</Date>
-        <Content>
-          25살이 되고 우울한 날 3시간동안 말동무가 되주었다. 들어주기만 해도
-          위로가 되었다.
-        </Content>
+        {records.map((record, index) => (
+          <div key={index}>
+            <Date>{record.created_at}</Date>
+            <Content>{record.description}</Content>
+          </div>
+        ))}
+        <Footer />
       </Wrapper>
     </>
   );

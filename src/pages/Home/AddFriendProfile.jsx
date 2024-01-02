@@ -11,6 +11,7 @@ import {
 } from "../../styles/Common";
 import ImageUpload from "../../components/ImageUpload";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 export default function AddFriendProfile() {
   const token = localStorage.getItem("token");
@@ -70,26 +71,34 @@ export default function AddFriendProfile() {
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-      <ImageUpload onFileUrlChange={handleFileUrlChange} value={profile_img} />
+      <ImageUpload
+        onFileUrlChange={handleFileUrlChange}
+        value={profile_img}
+      />
       <InputBox
-        name="nickname"
-        placeholder="친구의 별명을 알려주세요"
+        name='nickname'
+        placeholder='친구의 별명을 알려주세요'
         {...register("nickname", { required: "필수입력사항입니다" })}
-        margintop="64px"
+        margintop='64px'
       />
       {errors.nickname && <ErrorText>{errors.nickname.message}</ErrorText>}
 
       <InputBox
-        name="relation"
-        placeholder="친구와 나의 관계/상태를 적어주세요"
+        name='relation'
+        placeholder='친구와 나의 관계/상태를 적어주세요'
         {...register("relation", { required: "필수입력사항입니다." })}
-        margintop="32px"
+        margintop='32px'
       />
       {errors.relation && <ErrorText>{errors.relation.message}</ErrorText>}
 
-      <Button color="#71CACC" type="submit" marginTop="64px">
+      <Button
+        color='#71CACC'
+        type='submit'
+        marginTop='64px'
+      >
         확인
       </Button>
+      <Footer />
     </FormWrapper>
   );
 }

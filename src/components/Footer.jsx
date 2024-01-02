@@ -1,9 +1,8 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import Ranking from "../assets/image/ranking.png";
-import Main from "../assets/image/peoples.png";
-import danger from "../assets/image/Error.png";
+import { IoWarning, IoPerson } from "react-icons/io5";
+import { FaRankingStar } from "react-icons/fa6";
 
 const Footer = () => {
   const location = useLocation();
@@ -12,42 +11,45 @@ const Footer = () => {
   const isDangerPath = /^\/Danger\b/.test(location.pathname);
   const isRankingPath = /^\/ranking\b/.test(location.pathname);
 
+  const icons = {
+    main: IoPerson,
+    danger: IoWarning,
+    ranking: FaRankingStar,
+  };
+
   return (
-    <Navwrapper>
+    <NavWrapper>
       <NavLink
         to='/main'
         style={isMainPath ? { color: "#8BDFDC" } : { color: "#666" }}
       >
-        <IconWrapper
-          src={Main}
-          alt='main'
-        />
+        <IconWrapper>
+          <icons.main style={{ fontSize: "50px" }} />
+        </IconWrapper>
       </NavLink>
       <NavLink
-        to='/Danger'
+        to='/danger'
         style={isDangerPath ? { color: "#8BDFDC" } : { color: "#666" }}
       >
-        <IconWrapper
-          src={danger}
-          alt='danger'
-        />
+        <IconWrapper>
+          <icons.danger style={{ fontSize: "50px" }} />
+        </IconWrapper>
       </NavLink>
       <NavLink
         to='/ranking'
         style={isRankingPath ? { color: "#8BDFDC" } : { color: "#666" }}
       >
-        <IconWrapper
-          src={Ranking}
-          alt='ranking'
-        />
+        <IconWrapper>
+          <icons.ranking style={{ fontSize: "50px" }} />
+        </IconWrapper>
       </NavLink>
-    </Navwrapper>
+    </NavWrapper>
   );
 };
 
 export default Footer;
 
-const Navwrapper = styled.div`
+const NavWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
@@ -59,10 +61,13 @@ const Navwrapper = styled.div`
   border-top: 0.4px solid #545f71;
 `;
 
-const IconWrapper = styled.img`
+const IconWrapper = styled.div`
   display: flex;
-  margin: 20px 30px 20px 30px;
-  text-decoration: none;
-  width: 50px;
-  height: 50px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  size: 50px;
+  /* margin: 20px 30px 20px 30px; */
+  width: 80px;
+  height: 80px;
 `;

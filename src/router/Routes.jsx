@@ -28,8 +28,8 @@ const Routes = () => {
           element={<SetProfile />}
         />
       </ReactRouters>
-      <Footer>
-        <ReactRouters>
+      <ReactRouters>
+        <Route element={<Footer />}>
           <Route
             path='/'
             element={<MainPage />}
@@ -58,8 +58,8 @@ const Routes = () => {
             path='/Ranking/:id'
             element={<Ranking />}
           />
-        </ReactRouters>
-      </Footer>
+        </Route>
+      </ReactRouters>
     </>
   );
 };

@@ -12,7 +12,7 @@ const Footer = () => {
     <Navwrapper>
       <NavLink
         to='/'
-        className={location.pathname.startsWith === `/main` ? "active" : ""}
+        className={location.pathname.startsWith === "/main" ? "active" : ""}
       >
         <IconWrapper
           src={Main}
@@ -21,7 +21,7 @@ const Footer = () => {
       </NavLink>
       <NavLink
         to='/Danger'
-        className={location.pathname.startsWith === `/Danger/*` ? "active" : ""}
+        className={location.pathname.startsWith === "/Danger/" ? "active" : ""}
       >
         <IconWrapper
           src={danger}
@@ -30,9 +30,7 @@ const Footer = () => {
       </NavLink>
       <NavLink
         to='/Ranking'
-        className={
-          location.pathname.startsWith === `/Ranking/*` ? "active" : ""
-        }
+        className={location.pathname.startsWith === "/Ranking/" ? "active" : ""}
       >
         <IconWrapper
           src={Ranking}
@@ -47,12 +45,11 @@ export default Footer;
 
 const Navwrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  position: absolute;
+  justify-content: space-between;
+  position: fixed;
   bottom: 30px;
-  left: 30px;
+  left: 5px;
   max-width: 530px;
-  left: 0;
   background: #fff;
 `;
 
@@ -60,11 +57,10 @@ const IconWrapper = styled.img`
   display: flex;
   margin: 20px 60px 0px 30px;
   text-decoration: none;
-  color: #666666;
+  filter: ${({ active }) =>
+    active
+      ? "invert(84%) sepia(46%) saturate(291%) hue-rotate(121deg) brightness(91%) contrast(94%)"
+      : "invert(43%) sepia(1%) saturate(0%) hue-rotate(137deg) brightness(91%) contrast(90%)"};
   width: 50px;
   height: 50px;
-
-  &.active {
-    color: #8bdfdc;
-  }
 `;

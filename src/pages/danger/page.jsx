@@ -1,11 +1,5 @@
-import FriendProfile from "../../components/FriendProfile";
-import { Button } from '../../styles/Common';
-
-const DUMMY_MYPROFILE = {
-  "profile_img": "https://mybueno2023.s3.ap-northeast-2.amazonaws.com/upload/IMG_5864.jpg",
-  "nickname": "토미",
-  "promise": "새 친구를 찾아보자"
-}
+import React from 'react'
+import FriendProfile from '../../components/FriendProfile'
 
 const DUMMY_FREINDSLIST = [
   {
@@ -35,19 +29,22 @@ const DUMMY_FREINDSLIST = [
   }
 ]
 
-const HomePage = () => {
-
+const DangerPage = () => {
   return (
-    
-    <div className='text-center'>
-      <div className='flex items-center w-full gap-2'>
-        <img className="w-20 h-20 rounded-full object-fit" src={DUMMY_MYPROFILE.profile_img} alt="bueno-img"  />
-        <div className='flex flex-col gap-2 text-start'>
-          <p className='text-lg font-bold'>{DUMMY_MYPROFILE.nickname}</p>
-          <p className='px-2 py-1 border border-black rounded-md'>{DUMMY_MYPROFILE.promise}</p>
+    <>
+      <div className='flex flex-col items-center'>
+        <div className="bg-gradient-to-r from-main-color to-sub-color-2 w-[400px] h-52 my-12 relative">
+          <img  // 경고이미지
+            className='absolute object-cover w-40 h-40 right-5 bottom-2'
+            src={require('../../assets/image/warning.png')}
+            alt=''
+          />
+          <div className='absolute flex flex-col gap-3 px-2 left-2 top-2'>
+            <label className='px-2 py-1 text-2xl font-bold text-center bg-white border rounded-lg'>손절 위원회</label>
+            <p className='w-[200px] text-white '>친구관계, 고민된다면 여기서 정리해 보세요</p>
+          </div>
         </div>
       </div>
-      <Button color='rgba(113, 202, 204, 1)'>친구 추가</Button>
       <div className='px-2 my-10'>
         <p className='font-semibold text-gray-300 text-start'>친구 목록</p>
         <div className='my-5' />
@@ -63,9 +60,10 @@ const HomePage = () => {
             </>
           ))}
       </div>
-    </div>
-  
-  );
-}
-export default HomePage;
 
+    </>
+
+  )
+}
+
+export default DangerPage

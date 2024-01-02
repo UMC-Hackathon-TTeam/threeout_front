@@ -6,10 +6,10 @@ const FriendProfile = ({
   relation
 }) => {
   return (
-    <div className='flex items-center gap-2 w-full'>
-      <img className="w-16 h-16 object-fit rounded-full" src={img} alt="bueno-img"  />
+    <div className='flex items-center w-full gap-2'>
+      <img className="w-16 h-16 rounded-full object-fit" src={img} alt="bueno-img"  />
       <p className='font-bold'>{nickname}</p>
-      <p className='ml-20 px-2 py-1 border rounded-md bg-gray-300'>{relation}</p>
+      <p className='w-32 px-2 py-1 ml-20 bg-gray-300 border rounded-md'>{relation}</p>
       
     </div>
   )

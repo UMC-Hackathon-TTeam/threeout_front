@@ -26,7 +26,7 @@ export default function Login() {
   };
 
   const goToSign = () => {
-    navigate("/auth/signIn");
+    navigate("/auth/signUp");
   };
 
   return (

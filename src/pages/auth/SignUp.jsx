@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { emailState, passwordState } from "../../recoil/atom";
+import { useRecoilState } from "recoil";
+import styled, { css } from "styled-components";
 import {
   Button,
   Wrapper,
@@ -31,8 +34,11 @@ const validationSchema = yup.object().shape({
     .oneOf([yup.ref("password")], "비밀번호가 다릅니다."),
 });
 
-export default function Login() {
-  const [info, setInfo] = useState({});
+export default function SignUp() {
+  const [, setInfo] = useState({});
+  const [, setEmail] = useRecoilState(emailState);
+  const [, setPassword] = useRecoilState(passwordState);
+
   const navigate = useNavigate();
   const {
     register,
@@ -52,6 +58,8 @@ export default function Login() {
   const onSubmit = (data) => {
     setInfo(data);
     console.log(data);
+    setEmail(data.email);
+    setPassword(data.password);
     navigate("/auth/setProfile");
   };
 
@@ -85,7 +93,7 @@ export default function Login() {
         <ErrorText>{errors.passwordConfirm.message}</ErrorText>
       )}
 
-      <Button color="#848484" type="submit">
+      <Button color="#848484" marginTop="100px" type="submit">
         다음 단계로 이동
       </Button>
     </Wrapper>

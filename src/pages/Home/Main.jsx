@@ -5,27 +5,29 @@ import axios from "axios";
 import styled from "styled-components";
 import noList from "../../assets/image/noList.png";
 import { useNavigate } from "react-router-dom";
-
-const DUMMY_MYPROFILE = {
-  profile_img:
-    "https://mybueno2023.s3.ap-northeast-2.amazonaws.com/upload/IMG_5864.jpg",
-  nickname: "토미",
-  promise: "새 친구를 찾아보자",
-};
+import { nameState } from "../../recoil/atom";
+import { useRecoilState } from "recoil";
 
 const HomePage = () => {
   const [myProfile, setMyProfile] = useState({});
   const [friendsList, setFriendsList] = useState([]);
+  const [name, setName] = useRecoilState(nameState);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   useEffect(() => {
-    // API에서 내 프로필 데이터 가져오기
-    // axios.get("http://43.201.170.138:8080/3out/home").then((response) => {
-    //   setMyProfile(response.data);
-    // });
+    axios
+      .get("http://43.201.170.138:8080/3out/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`, // 토큰을 헤더에 추가
+        },
+      })
+      .then((response) => {
+        console.log(response.data.result);
+        setMyProfile(response.data.result);
+        setName(response.data.result.nickname);
+      });
 
-    // API에서 친구 목록 데이터 가져오기
     axios
       .get("http://43.201.170.138:8080/3out/home", {
         headers: {
@@ -50,13 +52,13 @@ const HomePage = () => {
       <div className="flex items-center w-full gap-2">
         <img
           className="w-[64px] h-[64px] rounded-full object-fit"
-          src={DUMMY_MYPROFILE.profile_img}
+          src={myProfile.image}
           alt="bueno-img"
         />
         <div className="flex flex-col gap-2 text-start">
-          <p className="text-lg font-bold">{DUMMY_MYPROFILE.nickname}</p>
+          <p className="text-lg font-bold">{myProfile.nickname}</p>
           <p className="px-2 py-1 border border-black rounded-md">
-            {DUMMY_MYPROFILE.promise}
+            {myProfile.promise}
           </p>
         </div>
       </div>
@@ -75,7 +77,8 @@ const HomePage = () => {
           friendsList.map((data, index) => (
             <div key={index}>
               <FriendProfile
-                img={data.profile_img}
+                id={data.id}
+                img={data.image}
                 nickname={data.nickname}
                 relation={data.relation}
               />

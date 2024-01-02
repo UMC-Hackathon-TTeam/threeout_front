@@ -27,14 +27,20 @@ const Routes = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/main" element={<Main />} />
         <Route path="/main/addFriendProfile" element={<AddFriendProfile />} />
-        <Route path="/main/friendProfile/:id" element={<FriendProfile />} />
         <Route
-          path="/main/friendProfile/sticker/:id"
+          path="/main/friendProfile/:friendId"
+          element={<FriendProfile />}
+        />
+        <Route
+          path="/main/friendProfile/sticker/:friendId"
           element={<RecordSticker />}
         />
-        <Route path="/main/friendProfile/text/:id" element={<RecordText />} />
         <Route
-          path="/main/friendProfile/detail/:id"
+          path="/main/friendProfile/text/:friendId"
+          element={<RecordText />}
+        />
+        <Route
+          path="/main/friendProfile/detail/:friendId"
           element={<DetailRecord />}
         />
         <Route path="/ranking" element={<Ranking />} />

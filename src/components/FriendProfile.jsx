@@ -1,9 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const FriendProfile = ({ img, nickname, relation }) => {
+const FriendProfile = ({ id, img, nickname, relation }) => {
+  const navigate = useNavigate();
+
+  const onClickFriend = () => {
+    navigate(`/main/friendProfile/${id}`);
+  };
+
   return (
-    <div className="flex items-center w-full gap-2">
+    <div className="flex items-center w-full gap-2" onClick={onClickFriend}>
       <img
         className="w-16 h-16 rounded-full object-fit"
         src={img}

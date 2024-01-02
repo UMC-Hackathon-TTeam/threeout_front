@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Wrapper } from "./../../styles/Common";
 import { emotionState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
@@ -9,10 +9,51 @@ import happy from "../../assets/image/happy.png";
 import sad from "../../assets/image/sad.png";
 import warning from "../../assets/image/warning.png";
 import { AiOutlineLeft } from "react-icons/ai";
+import axios from "axios";
 
 export default function DetailRecord() {
   const [emotion] = useRecoilState(emotionState);
   const navigate = useNavigate();
+  const { friendId } = useParams();
+  const parsedFriendId = Number(friendId);
+  const token = localStorage.getItem("token");
+  const [records, setRecords] = useState([]);
+
+  const getStickerIdByEmotion = (emotion) => {
+    switch (emotion) {
+      case "impressed":
+        return 1; // impressed에 해당하는 stickerId
+      case "happy":
+        return 2; // happy에 해당하는 stickerId
+      case "sad":
+        return 3; // sad에 해당하는 stickerId
+      case "warning":
+        return 4; // warning에 해당하는 stickerId
+      default:
+        return 1; // 기본값으로 impressed stickerId를 사용
+    }
+  };
+
+  const stickerId = getStickerIdByEmotion(emotion);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://43.201.170.138:8080/3out/record?friendId=${parsedFriendId}&stickerId=${stickerId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // 토큰을 헤더에 추가
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        setRecords(response.data.result);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [parsedFriendId, stickerId, token]);
 
   const goBack = () => {
     navigate(-1); // 뒤로 가기

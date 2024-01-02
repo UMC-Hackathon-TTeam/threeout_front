@@ -51,6 +51,7 @@ export default function AddFriendProfile() {
         {
           nickname: data.nickname,
           relation: data.relation,
+          image: data.profile_img,
         },
         {
           headers: {

@@ -7,67 +7,73 @@ import impressed from "../../assets/image/impressed.png";
 import happy from "../../assets/image/happy.png";
 import sad from "../../assets/image/sad.png";
 import warning from "../../assets/image/warning.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function FriendProfile() {
   const navigate = useNavigate();
+  const { friendId } = useParams();
+  const parsedFriendId = Number(friendId);
   const [selectedEmotion, setSelectedEmotion] = useRecoilState(emotionState);
   const token = localStorage.getItem("token");
   const [friendProfile, setFriendProfile] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://43.201.170.138:8080/3out/home", {
+      .get(`http://43.201.170.138:8080/3out/home/${parsedFriendId}`, {
         headers: {
           Authorization: `Bearer ${token}`, // 토큰을 헤더에 추가
         },
       })
       .then(function (response) {
         console.log(response);
-        setFriendProfile(response.result);
+        setFriendProfile(response.data.result);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [friendId, token]);
 
   const addRecord = () => {
-    navigate("/main/friendProfile/sticker/1");
+    navigate(`/main/friendProfile/sticker/${parsedFriendId}`);
   };
 
   const handleEmotionClick = (emotion) => {
     setSelectedEmotion(emotion);
     console.log(emotion);
-    navigate("/main/friendProfile/detail/1");
+    navigate(`/main/friendProfile/detail/${parsedFriendId}`);
   };
 
   return (
     <Wrapper>
       <ProfileWrapper>
-        <ProfileImg alt="" />
-        <Name>박승태</Name>
-        <Detail>대학 동기 / 자주 만남</Detail>
+        <ProfileImg alt="" src={friendProfile[0]?.image} />
+        <Name>{friendProfile[0]?.nickname}</Name>
+        <Detail>{friendProfile[0]?.relation}</Detail>
       </ProfileWrapper>
       <Container>
         <Title>친구와 나의 관계</Title>
         <ListWrapper>
-          <ListItem onClick={() => handleEmotionClick("impressed")}>
-            <EmotionImg image={impressed} />
-            <EmotionTxt>3개</EmotionTxt>
-          </ListItem>
-          <ListItem onClick={() => handleEmotionClick("happy")}>
-            <EmotionImg image={happy} />
-            <EmotionTxt>5개</EmotionTxt>
-          </ListItem>
-          <ListItem onClick={() => handleEmotionClick("warning")}>
-            <EmotionImg image={warning} />
-            <EmotionTxt>1개</EmotionTxt>
-          </ListItem>
-          <ListItem onClick={() => handleEmotionClick("sad")}>
-            <EmotionImg image={sad} />
-            <EmotionTxt>0개</EmotionTxt>
-          </ListItem>
+          {friendProfile[0] && (
+            <>
+              <ListItem onClick={() => handleEmotionClick("impressed")}>
+                <EmotionImg image={impressed} />
+                <EmotionTxt>{friendProfile[1]?.감동}개</EmotionTxt>
+              </ListItem>
+              <ListItem onClick={() => handleEmotionClick("happy")}>
+                <EmotionImg image={happy} />
+                <EmotionTxt>{friendProfile[1]?.신남}개</EmotionTxt>
+              </ListItem>
+              <ListItem onClick={() => handleEmotionClick("warning")}>
+                <EmotionImg image={warning} />
+                <EmotionTxt>{friendProfile[1]?.경고}개</EmotionTxt>
+              </ListItem>
+              <ListItem onClick={() => handleEmotionClick("sad")}>
+                <EmotionImg image={sad} />
+                <EmotionTxt>{friendProfile[1]?.서운함}개</EmotionTxt>
+              </ListItem>
+            </>
+          )}
         </ListWrapper>
         <Button color="#71CACC" onClick={addRecord}>
           기록추가하기

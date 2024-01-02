@@ -48,6 +48,7 @@ export default function SetProfile() {
         password: password,
         nickname: data.nickname,
         promise: data.promise,
+        image: data.profile_img,
       })
       .then(function (response) {
         console.log(response);

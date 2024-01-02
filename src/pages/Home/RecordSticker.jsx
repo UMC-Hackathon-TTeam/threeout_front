@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./../../styles/Common";
-import { emotionState } from "../../recoil/atom";
+import { emotionState, nameState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
 import impressed from "../../assets/image/impressed.png";
 import happy from "../../assets/image/happy.png";
@@ -12,6 +12,7 @@ import warning from "../../assets/image/warning.png";
 export default function RecordSticker() {
   const navigate = useNavigate();
   const [selectedEmotion, setSelectedEmotion] = useRecoilState(emotionState);
+  const [name] = useRecoilState(nameState);
 
   const moveToText = () => {
     navigate("/main/friendProfile/text/1");
@@ -25,7 +26,7 @@ export default function RecordSticker() {
   return (
     <Wrapper>
       <Title>
-        박승태와 함께한 하루는 어땠나요?
+        {name}과 함께한 하루는 어땠나요?
         <br />
         오늘 친구에게 느낀 감정을 골라보세요
       </Title>

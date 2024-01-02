@@ -11,6 +11,8 @@ import RecordText from "./../pages/Home/RecordText";
 import DetailRecord from "./../pages/Home/DetailRecord";
 import Ranking from "./../pages/Ranking";
 import DangerPage from '../pages/danger/page';
+import ClickDangerPage from '../pages/danger/ClickDangerPage';
+import Review from '../pages/danger/Review';
 
 
 const Routes = () => {
@@ -43,7 +45,9 @@ const Routes = () => {
         
       </ReactRouters>
       <ReactRouters>
-        <Route path="/danger" element={<DangerPage />} />
+        <Route path="/Danger" element={<DangerPage />} />
+        <Route path="/Danger/:id" element={<ClickDangerPage />} />
+        <Route path="/Danger/:id/review" element={<Review />} />
       </ReactRouters>
     </>
   );
